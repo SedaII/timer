@@ -3,10 +3,14 @@ const seconds = document.getElementById('seconds')
 const minutes = document.getElementById('minutes')
 const hours = document.getElementById('hours')
 const startBtn = document.getElementById('start-btn')
+const intervalBtn = document.getElementById('interval-btn')
+const intervalContainer = document.getElementById('interval-container')
 
 let intervalId
+let intervalIdx = 0
 
 startBtn.addEventListener('click', () => toggleTimer())
+intervalBtn.addEventListener('click', () => createInterval())
 
 const updateMseconds = () => {
   let ms = mseconds.innerText
@@ -65,4 +69,13 @@ const toggleTimer = () => {
 
 const convertTo2DigitNbr = digit => {
   return "0" + digit
+}
+
+const createInterval = () => {
+    const intervalEl = document.createElement("div")
+    intervalEl.classList.add('interval')
+    intervalEl.innerHTML = `<span>${hours.innerText}</span>:<span>${minutes.innerText}</span>:<span>${seconds.innerText}</span>.<span>${mseconds.innerText}</span>
+    <strong id="idx">${intervalIdx}</strong>`
+    intervalContainer.appendChild(intervalEl)
+    intervalIdx++
 }
