@@ -4,7 +4,7 @@ const intervalBtn = document.getElementById('interval-btn')
 const intervalContainer = document.getElementById('interval-container')
 
 ///New feature//////////////////////////////////////////////////////////////
-const mainTimer = {hours: '11', minutes: '11', seconds: '11', mseconds: '00'}
+const mainTimer = {hours: '00', minutes: '00', seconds: '11', mseconds: '00'}
 
 const timeHandler = (timer) => {
   if(timer.mseconds == 98) {
