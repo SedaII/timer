@@ -1,10 +1,26 @@
-const mseconds = document.getElementById('mseconds')
-const seconds = document.getElementById('seconds')
-const minutes = document.getElementById('minutes')
-const hours = document.getElementById('hours')
+const timerEl = document.querySelector('.timer')
 const startBtn = document.getElementById('start-btn')
 const intervalBtn = document.getElementById('interval-btn')
 const intervalContainer = document.getElementById('interval-container')
+
+///New feature//////////////////////////////////////////////////////////////
+const mainTimer = {hours: '11', minutes: '11', seconds: '11', mseconds: '00'}
+
+const timeHandler = (timer) => {
+  if(timer.mseconds == 98) {
+    timer.mseconds = '00'
+    updateSec(timer)
+  } else if (timer.mseconds < 9) {
+    timer.mseconds++
+    timer.mseconds = convertTo2DigitNbr(timer.mseconds)
+  }
+  else timer.mseconds++
+
+
+
+  timerEl.innerHTML = `<span>${timer.hours}:${timer.minutes}:${timer.seconds}.${timer.mseconds}</span>`
+}
+////////////////////////////////////////////////////////////////////////////
 
 let intervalId
 let intervalIdx = 0
@@ -13,7 +29,7 @@ let intervalTime = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'}
 startBtn.addEventListener('click', () => toggleTimer())
 intervalBtn.addEventListener('click', () => createInterval())
 
-const updateMseconds = () => {
+const updateMsec = () => {
   let ms = mseconds.innerText
   if(ms == 99) {
     ms = 0
@@ -44,21 +60,15 @@ const updateMseconds = () => {
   }
 }
 
-const updateSeconds = () => {
-  let sec = seconds.innerText
-  if(sec == 59) {
-    sec = 0
-    intervalTime.seconds = '00'
-    updateMin()
+const updateSec = (timer) => {
+  if(timer.seconds == 59) {
+    timer.seconds = '00'
+    updateMin(timer)
+  } else if (timer.seconds < 9) {
+    timer.seconds++
+    timer.seconds = convertTo2DigitNbr(timer.seconds)
   }
-  else sec++
-
-  if(sec <= 9) {
-    seconds.innerText = convertTo2DigitNbr(sec)
-  }
-  else {
-    seconds.innerText = sec
-  }
+  else timer.seconds++
 
   if(intervalTime.seconds < 9) {
     intervalTime.seconds++
@@ -68,30 +78,28 @@ const updateSeconds = () => {
   }
 }
 
-const updateMin = () => {
-  let min = minutes.innerText
-  if(min == 59) {
-    min = 0
-    updateHrs()
+const updateMin = (timer) => {
+  if(timer.minutes == 59) {
+    timer.minutes = '00'
+    updateHrs(timer)
+  } else if (timer.minutes < 9) {
+    timer.minutes++
+    timer.minutes = convertTo2DigitNbr(timer.minutes)
   }
-  else min++
-
-  if(min <= 9) minutes.innerText = convertTo2DigitNbr(min)
-  else minutes.innerText = min
+  else timer.minutes++
 }
 
-const updateHrs = () => {
-  let hrs = hours.innerText
-
-  hrs++
-
-  if(hrs <= 9) hours.innerText = convertTo2DigitNbr(hrs)
-  else hours.innerText = hrs
+const updateHrs = (timer) => {
+  if (timer.hours < 9) {
+    timer.hours++
+    timer.hours = convertTo2DigitNbr(timer.hours)
+  }
+  else timer.hours++
 }
 
 const toggleTimer = () => {
   if(startBtn.innerText === "Start") {
-    intervalId = setInterval(updateMseconds, 10)
+    intervalId = setInterval(timeHandler, 10, mainTimer)
     startBtn.innerText = "Stop"
   } else {
     clearInterval(intervalId)

@@ -11,9 +11,15 @@ body {
 }
 
 .timer {
-  padding: 0;
-  margin: 0;
+  background-color: #000;
+  color: #fff;
+  padding: 15px;
   font-size: 48px;
+  width: 33vw;
+  text-align: center;
+}
+
+span {
 }
 
 .btn {
@@ -23,7 +29,6 @@ body {
 }
 
 .btn:hover {
-
 }
 
 .btn:focus {
@@ -31,5 +36,4 @@ body {
 }
 
 .interval {
-  
 }
