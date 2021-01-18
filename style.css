@@ -39,5 +39,13 @@ span {
   outline: 0;
 }
 
+.interval-container {
+  font-size: 16px;
+  background-color: #000;
+  color: #fff;
+  padding: 15px;
+}
+
 .interval {
+  font-family: 'Roboto', monospace;
 }

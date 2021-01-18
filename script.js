@@ -2,11 +2,8 @@ const timerEl = document.querySelector('.timer')
 const startBtn = document.getElementById('start-btn')
 const intervalBtn = document.getElementById('interval-btn')
 const intervalContainer = document.getElementById('interval-container')
-
-///New feature//////////////////////////////////////////////////////////////
 const mainTimer = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'}
 let mainIntervalId
-
 const intervalTimer = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'}
 let intervalIdx = 0
 let intervalId
@@ -17,26 +14,30 @@ const convertTo2DigitNbr = digit => {
 }
 
 const timeHandler = (timer) => {
-  if(timer.mseconds == 98) {
-    timer.mseconds = '00'
-    updateSec(timer)
-  } else if (timer.mseconds < 9) {
-    timer.mseconds++
-    timer.mseconds = convertTo2DigitNbr(timer.mseconds)
-  } else {
-    timer.mseconds++
-  }
-  timerEl.innerHTML = `<span>${timer.hours}:${timer.minutes}:${timer.seconds}.${timer.mseconds}</span>`
-  if(intervalIdx > 0) {
+  if(timer === mainTimer) {
+    if(timer.mseconds == 98) {
+      timer.mseconds = '00'
+      updateSec(timer)
+    } else if (timer.mseconds < 9) {
+      timer.mseconds++
+      timer.mseconds = convertTo2DigitNbr(timer.mseconds)
+    } else {
+      timer.mseconds++
+    }
+    timerEl.innerHTML = `<span>${timer.hours}:${timer.minutes}:${timer.seconds}.${timer.mseconds}</span>`
+  } else if(timer === intervalTimer) {
+    if(timer.mseconds == 98) {
+      timer.mseconds = '00'
+      updateSec(timer)
+    } else if (timer.mseconds < 9) {
+      timer.mseconds++
+      timer.mseconds = convertTo2DigitNbr(timer.mseconds)
+    } else {
+      timer.mseconds++
+    }
     intervalContainer.lastChild.innerHTML = `<span>${intervalTimer.hours}:${intervalTimer.minutes}:${intervalTimer.seconds}.${intervalTimer.mseconds}</span> <strong id="idx">${intervalIdx}</strong>`
   }
 }
-////////////////////////////////////////////////////////////////////////////
-
-
-
-startBtn.addEventListener('click', () => toggleTimer())
-intervalBtn.addEventListener('click', () => createInterval())
 
 const updateSec = (timer) => {
   if(timer.seconds == 59) {
@@ -75,6 +76,7 @@ const toggleTimer = () => {
     intervalBtn.disabled = false
     if(intervalIdx > 0) {
       intervalId = setInterval(timeHandler, 10, intervalTimer)
+    } else {
     }
   } else {
     clearInterval(mainIntervalId)
@@ -114,5 +116,7 @@ const createInterval = () => {
     }
     clearInterval(intervalId)
     intervalId = setInterval(timeHandler, 10, intervalTimer)
-
 }
+
+startBtn.addEventListener('click', () => toggleTimer())
+intervalBtn.addEventListener('click', () => createInterval())
