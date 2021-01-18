@@ -4,7 +4,17 @@ const intervalBtn = document.getElementById('interval-btn')
 const intervalContainer = document.getElementById('interval-container')
 
 ///New feature//////////////////////////////////////////////////////////////
-const mainTimer = {hours: '00', minutes: '00', seconds: '11', mseconds: '00'}
+const mainTimer = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'}
+let mainIntervalId
+
+const intervalTimer = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'}
+let intervalIdx = 0
+let intervalId
+
+
+const convertTo2DigitNbr = digit => {
+  return "0" + digit
+}
 
 const timeHandler = (timer) => {
   if(timer.mseconds == 98) {
@@ -13,52 +23,20 @@ const timeHandler = (timer) => {
   } else if (timer.mseconds < 9) {
     timer.mseconds++
     timer.mseconds = convertTo2DigitNbr(timer.mseconds)
+  } else {
+    timer.mseconds++
   }
-  else timer.mseconds++
-
-
-
   timerEl.innerHTML = `<span>${timer.hours}:${timer.minutes}:${timer.seconds}.${timer.mseconds}</span>`
+  if(intervalIdx > 0) {
+    intervalContainer.lastChild.innerHTML = `<span>${intervalTimer.hours}:${intervalTimer.minutes}:${intervalTimer.seconds}.${intervalTimer.mseconds}</span> <strong id="idx">${intervalIdx}</strong>`
+  }
 }
 ////////////////////////////////////////////////////////////////////////////
 
-let intervalId
-let intervalIdx = 0
-let intervalTime = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'}
+
 
 startBtn.addEventListener('click', () => toggleTimer())
 intervalBtn.addEventListener('click', () => createInterval())
-
-const updateMsec = () => {
-  let ms = mseconds.innerText
-  if(ms == 99) {
-    ms = 0
-    intervalTime.mseconds = '00'
-    updateSeconds()
-  }
-  else ms++
-
-  if(ms <= 9) {
-    mseconds.innerText = convertTo2DigitNbr(ms)
-  }
-  else {
-    mseconds.innerText = ms
-  }
-
-  if(intervalTime.mseconds < 9) {
-    intervalTime.mseconds++
-    intervalTime.mseconds = convertTo2DigitNbr(intervalTime.mseconds)
-  } else {
-    intervalTime.mseconds++
-  }
-
-
-
-  if(intervalIdx > 0) {
-    intervalContainer.lastChild.innerHTML = `<span>${intervalTime.hours}</span>:<span>${intervalTime.minutes}</span>:<span>${intervalTime.seconds}</span>.<span>${intervalTime.mseconds}</span>
-    <strong id="idx">${intervalIdx}</strong>`
-  }
-}
 
 const updateSec = (timer) => {
   if(timer.seconds == 59) {
@@ -69,13 +47,6 @@ const updateSec = (timer) => {
     timer.seconds = convertTo2DigitNbr(timer.seconds)
   }
   else timer.seconds++
-
-  if(intervalTime.seconds < 9) {
-    intervalTime.seconds++
-    intervalTime.seconds = convertTo2DigitNbr(intervalTime.seconds)
-  } else {
-    intervalTime.seconds++
-  }
 }
 
 const updateMin = (timer) => {
@@ -99,23 +70,28 @@ const updateHrs = (timer) => {
 
 const toggleTimer = () => {
   if(startBtn.innerText === "Start") {
-    intervalId = setInterval(timeHandler, 10, mainTimer)
+    mainIntervalId = setInterval(timeHandler, 10, mainTimer)
     startBtn.innerText = "Stop"
+    intervalBtn.disabled = false
+    if(intervalIdx > 0) {
+      intervalId = setInterval(timeHandler, 10, intervalTimer)
+    }
   } else {
-    clearInterval(intervalId)
+    clearInterval(mainIntervalId)
     startBtn.innerText = "Start"
+    intervalBtn.disabled = true
+    if(intervalIdx > 0) {
+      clearInterval(intervalId)
+    }
   }
 }
 
-const convertTo2DigitNbr = digit => {
-  return "0" + digit
-}
 
 const createInterval = () => {
     if(intervalIdx === 0) {
       const intervalEl = document.createElement("div")
       intervalEl.classList.add('interval')
-      intervalEl.innerHTML = `<span>${hours.innerText}</span>:<span>${minutes.innerText}</span>:<span>${seconds.innerText}</span>.<span>${mseconds.innerText}</span>
+      intervalEl.innerHTML = `<span>${mainTimer.hours}</span>:<span>${mainTimer.minutes}</span>:<span>${mainTimer.seconds}</span>.<span>${mainTimer.mseconds}</span>
       <strong id="idx">${intervalIdx}</strong>`
       intervalContainer.appendChild(intervalEl)
       intervalIdx++
@@ -133,8 +109,10 @@ const createInterval = () => {
       intervalContainer.appendChild(intervalEl)
     }
 
-    for(let prop in intervalTime) {
-      intervalTime[prop] = '00'
+    for(let prop in intervalTimer) {
+      intervalTimer[prop] = '00'
     }
+    clearInterval(intervalId)
+    intervalId = setInterval(timeHandler, 10, intervalTimer)
 
 }
