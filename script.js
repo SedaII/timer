@@ -14,27 +14,20 @@ const convertTo2DigitNbr = digit => {
 }
 
 const timeHandler = (timer) => {
+
+  if(timer.mseconds == 98) {
+    timer.mseconds = '00'
+    updateSec(timer)
+  } else if (timer.mseconds < 9) {
+    timer.mseconds++
+    timer.mseconds = convertTo2DigitNbr(timer.mseconds)
+  } else {
+    timer.mseconds++
+  }
+
   if(timer === mainTimer) {
-    if(timer.mseconds == 98) {
-      timer.mseconds = '00'
-      updateSec(timer)
-    } else if (timer.mseconds < 9) {
-      timer.mseconds++
-      timer.mseconds = convertTo2DigitNbr(timer.mseconds)
-    } else {
-      timer.mseconds++
-    }
     timerEl.innerHTML = `<span>${timer.hours}:${timer.minutes}:${timer.seconds}.${timer.mseconds}</span>`
   } else if(timer === intervalTimer) {
-    if(timer.mseconds == 98) {
-      timer.mseconds = '00'
-      updateSec(timer)
-    } else if (timer.mseconds < 9) {
-      timer.mseconds++
-      timer.mseconds = convertTo2DigitNbr(timer.mseconds)
-    } else {
-      timer.mseconds++
-    }
     intervalContainer.lastChild.innerHTML = `<span>${intervalTimer.hours}:${intervalTimer.minutes}:${intervalTimer.seconds}.${intervalTimer.mseconds}</span> <strong id="idx">${intervalIdx}</strong>`
   }
 }
@@ -97,6 +90,7 @@ const createInterval = () => {
       <strong id="idx">${intervalIdx}</strong>`
       intervalContainer.appendChild(intervalEl)
       intervalIdx++
+
       const nextIntervalEl = document.createElement("div")
       nextIntervalEl.classList.add('interval')
       nextIntervalEl.innerHTML = `<span>00</span>:<span>00</span>:<span>00</span>.<span>00</span>
@@ -110,7 +104,6 @@ const createInterval = () => {
       <strong id="idx">${intervalIdx}</strong>`
       intervalContainer.appendChild(intervalEl)
     }
-
     for(let prop in intervalTimer) {
       intervalTimer[prop] = '00'
     }
