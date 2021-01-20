@@ -1,2 +1,3 @@
 # timer
-Pure JS timer for working out
+Vanilla.js timer for working out
+https://sedaii.github.io/timer/
