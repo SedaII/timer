@@ -1,6 +1,7 @@
 const timerEl = document.querySelector('.timer')
 const startBtn = document.getElementById('start-btn')
 const intervalBtn = document.getElementById('interval-btn')
+const resetBtn = document.getElementById('reset-btn')
 const intervalContainer = document.getElementById('interval-container')
 const mainTimer = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'}
 let mainIntervalId
@@ -67,6 +68,7 @@ const toggleTimer = () => {
     mainIntervalId = setInterval(timeHandler, 10, mainTimer)
     startBtn.innerText = "Stop"
     intervalBtn.disabled = false
+    resetBtn.disabled = true
     if(intervalIdx > 0) {
       intervalId = setInterval(timeHandler, 10, intervalTimer)
     } else {
@@ -75,6 +77,8 @@ const toggleTimer = () => {
     clearInterval(mainIntervalId)
     startBtn.innerText = "Start"
     intervalBtn.disabled = true
+    resetBtn.disabled = false
+
     if(intervalIdx > 0) {
       clearInterval(intervalId)
     }
@@ -111,5 +115,25 @@ const createInterval = () => {
     intervalId = setInterval(timeHandler, 10, intervalTimer)
 }
 
+const resetTimer = () => {
+  if(resetBtn.disabled === false) {
+    clearInterval(mainIntervalId)
+    clearInterval(intervalId)
+    for(let prop in intervalTimer) {
+      intervalTimer[prop] = '00'
+    }
+    for(let prop in mainTimer) {
+      mainTimer[prop] = '00'
+    }
+
+    console.log({mainTimer},{intervalTimer})
+    // resetBtn.disabled = true
+  } else {
+
+  }
+}
+
+
 startBtn.addEventListener('click', () => toggleTimer())
 intervalBtn.addEventListener('click', () => createInterval())
+resetBtn.addEventListener('click', () => resetTimer())

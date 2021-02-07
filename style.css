@@ -18,8 +18,8 @@ body {
   background-color: #000;
   color: #fff;
   padding: 15px;
-  font-size: 48px;
-  width: 33vw;
+  font-size: 2rem;
+  width: auto;
   text-align: center;
 }
 
@@ -43,16 +43,8 @@ span {
   outline: 0;
 }
 
-.btn.reset-btn:disabled {
-  position: absolute;
-  left: 0;
-  z-index: -2;
-}
+.btn.reset-btn {
 
-.btn.reset-btn:enabled {
-  position: absolute;
-  left: -10px;
-  z-index: -2;
 }
 
 .interval-container {
