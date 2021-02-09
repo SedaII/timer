@@ -1,9 +1,13 @@
-
+:root {
+  --prim-dark: #3a400d;
+  --prim-light: #9e784f;
+}
 
 
 body {
+  background-color: var(--prim-light);
+  color: var(--prim-dark);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
@@ -11,47 +15,71 @@ body {
   padding: 0;
   margin: 0;
   overflow: hidden;
+  position: relative;
+}
+
+.centered-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
 }
 
 .timer {
   font-family: 'Roboto', monospace;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--prim-dark);
+  color: var(--prim-light);
+  border-radius: 15px;
   padding: 15px;
+  margin: 15px;
   font-size: 2rem;
   width: auto;
   text-align: center;
-}
-
-span {
 }
 
 .btn-container {
   position: relative;
 }
 
-.btn {
+.btn-container .btn {
+  background-color: var(--prim-dark);
+  color: var(--prim-light);
+  border-radius: 8px;
+  border: none;
+  margin: 0px 2px;
+  padding: 8px 10px;
+  cursor: pointer;
   width: auto;
-  height: 38px;
   font-size: 20px;
 }
 
-.btn:hover {
+.btn-container .btn:disabled {
+  background-color: var(--prim-light);
+  color: var(--prim-dark);
+  border: 2px solid var(--prim-dark);
+  padding: 6px 8px;
+  opacity: 0.8;
 }
 
-.btn:focus {
+.btn-container .btn:active {
+  transform: scale(0.98);
+}
+
+.btn-container .btn:focus {
   outline: 0;
 }
 
-.btn.reset-btn {
-
-}
-
 .interval-container {
+  background-color: var(--prim-dark);
+  color: var(--prim-light);
+  border: none;
+  border-radius: 10px;
   font-size: 16px;
-  background-color: #000;
-  color: #fff;
   padding: 15px;
+  margin: 15px;
+  position: absolute;
+  transform: translate(150px);
 }
 
 .interval {
