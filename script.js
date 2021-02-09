@@ -126,8 +126,10 @@ const resetTimer = () => {
       mainTimer[prop] = '00'
     }
 
-    console.log({mainTimer},{intervalTimer})
-    // resetBtn.disabled = true
+    timerEl.innerHTML = `<span>${mainTimer.hours}:${mainTimer.minutes}:${mainTimer.seconds}.${mainTimer.mseconds}</span>`
+    intervalContainer.innerHTML = ''
+    intervalIdx = 0
+    resetBtn.disabled = true
   } else {
 
   }
