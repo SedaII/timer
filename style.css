@@ -33,7 +33,7 @@ body {
   border-radius: 15px;
   padding: 15px;
   margin: 15px;
-  font-size: 2rem;
+  font-size: 4rem;
   width: auto;
   text-align: center;
 }
@@ -51,7 +51,7 @@ body {
   padding: 8px 10px;
   cursor: pointer;
   width: auto;
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 .btn-container .btn:disabled {
@@ -77,11 +77,11 @@ body {
   color: var(--prim-light);
   border: none;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 1.5rem;
   padding: 15px;
   margin: 15px;
   height: auto;
-  max-height: 30vh;
+  max-height: 28vh;
   overflow-y: scroll;
 }
 
@@ -95,9 +95,6 @@ body {
   background: var(--prim-dark);
   border-radius: 10px;
   margin: 15px;
-  -webkit-box-shadow: inset hoff voff blur color;
-  box-shadow: 30px 0px 3px 3px #fff;
-  border: solid 3px var(--prim-dark);
 }
 
 /* Handle */
