@@ -29,7 +29,7 @@ const timeHandler = (timer) => {
   if(timer === mainTimer) {
     timerEl.innerHTML = `<span>${timer.hours}:${timer.minutes}:${timer.seconds}.${timer.mseconds}</span>`
   } else if(timer === intervalTimer) {
-    intervalContainer.lastChild.innerHTML = `<span>${intervalTimer.hours}:${intervalTimer.minutes}:${intervalTimer.seconds}.${intervalTimer.mseconds}</span> <strong id="idx">${intervalIdx}</strong>`
+    intervalContainer.firstChild.innerHTML = `<span>${intervalTimer.hours}:${intervalTimer.minutes}:${intervalTimer.seconds}.${intervalTimer.mseconds}</span> <strong id="idx">${intervalIdx}</strong>`
   }
 }
 
@@ -99,14 +99,14 @@ const createInterval = () => {
       nextIntervalEl.classList.add('interval')
       nextIntervalEl.innerHTML = `<span>00</span>:<span>00</span>:<span>00</span>.<span>00</span>
       <strong id="idx">${intervalIdx}</strong>`
-      intervalContainer.appendChild(nextIntervalEl)
+      intervalContainer.prepend(nextIntervalEl)
     } else {
       intervalIdx++
       const intervalEl = document.createElement("div")
       intervalEl.classList.add('interval')
       intervalEl.innerHTML = `<span>00</span>:<span>00</span>:<span>00</span>.<span>00</span>
       <strong id="idx">${intervalIdx}</strong>`
-      intervalContainer.appendChild(intervalEl)
+      intervalContainer.prepend(intervalEl)
     }
     for(let prop in intervalTimer) {
       intervalTimer[prop] = '00'
