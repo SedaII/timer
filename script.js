@@ -68,7 +68,7 @@ const toggleTimer = () => {
     mainIntervalId = setInterval(timeHandler, 10, mainTimer)
     startBtn.innerText = "Stop"
     intervalBtn.disabled = false
-    resetBtn.disabled = true
+    resetBtn.disabled = false
     if(intervalIdx > 0) {
       intervalId = setInterval(timeHandler, 10, intervalTimer)
     } else {
@@ -77,7 +77,6 @@ const toggleTimer = () => {
     clearInterval(mainIntervalId)
     startBtn.innerText = "Start"
     intervalBtn.disabled = true
-    resetBtn.disabled = false
 
     if(intervalIdx > 0) {
       clearInterval(intervalId)
@@ -130,6 +129,8 @@ const resetTimer = () => {
     intervalContainer.innerHTML = ''
     intervalIdx = 0
     resetBtn.disabled = true
+    startBtn.innerText = "Start"
+    intervalBtn.disabled = true
   } else {
 
   }
