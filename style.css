@@ -1,8 +1,28 @@
 :root {
-  --prim-dark: #3a400d;
+  --prim-dark: #660000;
   --prim-light: #9e784f;
+  /*grey #574f4f Bordeaux #660000 --prim-dark: #3a400d; --prim-light: #9e784f */
 }
 
+header {
+  background-color: var(--prim-dark);
+  color: var(--prim-light);
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  padding: 0 2rem;
+  margin: 0;
+}
+
+header h1 {
+  padding: 0 10px;
+}
+
+header .test {
+  background-color: #574f4f;
+  width: 100vw;
+  height: 100px;
+}
 
 body {
   background-color: var(--prim-light);
@@ -17,13 +37,43 @@ body {
   overflow: hidden;
 }
 
+.circle {
+  background-color: var(--prim-light);
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 0;
+  overflow: hidden;
+  
+  transform: rotate(30deg);
+  animation: 1.5s ease-out infinite animation
+}
+
+.circle .circle-strip {
+  background-color: var(--prim-dark);
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes animation {
+  from {gap: 10px}
+  50% {gap: 20px}
+  to {gap: 10px}
+}
+
 .main-container{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 45%;
+  padding: 0;
+  margin: 0;
+  top: 40%;
 }
 
 .timer {
