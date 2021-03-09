@@ -99,6 +99,8 @@ const createInterval = () => {
       nextIntervalEl.innerHTML = `<span>00</span>:<span>00</span>:<span>00</span>.<span>00</span>
       <strong id="idx">${intervalIdx}</strong>`
       intervalContainer.prepend(nextIntervalEl)
+      
+      intervalContainer.style.backgroundColor = 'var(--prim-dark)'
     } else {
       intervalIdx++
       const intervalEl = document.createElement("div")
@@ -131,6 +133,8 @@ const resetTimer = () => {
     resetBtn.disabled = true
     startBtn.innerText = "Start"
     intervalBtn.disabled = true
+    
+    intervalContainer.style.backgroundColor = ''
   } else {
 
   }
