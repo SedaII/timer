@@ -9,6 +9,21 @@ const intervalTimer = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'
 let intervalIdx = 0
 let intervalId
 
+const circles = document.querySelectorAll('.circle')
+
+function stopAnimation() {
+  circles.forEach((circle) => {
+    circle.style.animationPlayState = 'paused'
+  })
+}
+
+function startAnimation() {
+  circles.forEach((circle) => {
+    circle.style.animationPlayState = 'running'
+  })
+}
+
+
 
 const convertTo2DigitNbr = digit => {
   return "0" + digit
@@ -65,6 +80,7 @@ const updateHrs = (timer) => {
 
 const toggleTimer = () => {
   if(startBtn.innerText === "Start") {
+    startAnimation()
     mainIntervalId = setInterval(timeHandler, 10, mainTimer)
     startBtn.innerText = "Stop"
     intervalBtn.disabled = false
@@ -74,6 +90,7 @@ const toggleTimer = () => {
     } else {
     }
   } else {
+    stopAnimation()
     clearInterval(mainIntervalId)
     startBtn.innerText = "Start"
     intervalBtn.disabled = true
@@ -118,6 +135,7 @@ const createInterval = () => {
 
 const resetTimer = () => {
   if(resetBtn.disabled === false) {
+    stopAnimation()
     clearInterval(mainIntervalId)
     clearInterval(intervalId)
     for(let prop in intervalTimer) {
