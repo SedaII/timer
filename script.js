@@ -6,7 +6,7 @@ const intervalContainer = document.getElementById('interval-container')
 const mainTimer = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'}
 let mainIntervalId
 const intervalTimer = {hours: '00', minutes: '00', seconds: '00', mseconds: '00'}
-let intervalIdx = 0
+let intervalIdx = 1
 let intervalId
 
 const circles = document.querySelectorAll('.circle')
@@ -103,7 +103,7 @@ const toggleTimer = () => {
 
 
 const createInterval = () => {
-    if(intervalIdx === 0) {
+    if(intervalIdx === 1) {
       const intervalEl = document.createElement("div")
       intervalEl.classList.add('interval')
       intervalEl.innerHTML = `<span>${mainTimer.hours}</span>:<span>${mainTimer.minutes}</span>:<span>${mainTimer.seconds}</span>.<span>${mainTimer.mseconds}</span>
@@ -147,7 +147,7 @@ const resetTimer = () => {
 
     timerEl.innerHTML = `<span>${mainTimer.hours}:${mainTimer.minutes}:${mainTimer.seconds}.${mainTimer.mseconds}</span>`
     intervalContainer.innerHTML = ''
-    intervalIdx = 0
+    intervalIdx = 1
     resetBtn.disabled = true
     startBtn.innerText = "Start"
     intervalBtn.disabled = true
