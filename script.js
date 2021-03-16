@@ -44,7 +44,9 @@ const timeHandler = (timer) => {
   if(timer === mainTimer) {
     timerEl.innerHTML = `<span>${timer.hours}:${timer.minutes}:${timer.seconds}.${timer.mseconds}</span>`
   } else if(timer === intervalTimer) {
-    intervalContainer.firstChild.innerHTML = `<span>${intervalTimer.hours}:${intervalTimer.minutes}:${intervalTimer.seconds}.${intervalTimer.mseconds}</span> <strong id="idx">${intervalIdx}</strong>`
+    if(intervalContainer.firstChild) {
+      intervalContainer.firstChild.innerHTML = `<span>${intervalTimer.hours}:${intervalTimer.minutes}:${intervalTimer.seconds}.${intervalTimer.mseconds}</span> <strong class="idx">${intervalIdx}</strong>`
+    }
   }
 }
 
@@ -107,14 +109,14 @@ const createInterval = () => {
       const intervalEl = document.createElement("div")
       intervalEl.classList.add('interval')
       intervalEl.innerHTML = `<span>${mainTimer.hours}</span>:<span>${mainTimer.minutes}</span>:<span>${mainTimer.seconds}</span>.<span>${mainTimer.mseconds}</span>
-      <strong id="idx">${intervalIdx}</strong>`
+      <strong class="idx">${intervalIdx}</strong>`
       intervalContainer.appendChild(intervalEl)
       intervalIdx++
 
       const nextIntervalEl = document.createElement("div")
       nextIntervalEl.classList.add('interval')
       nextIntervalEl.innerHTML = `<span>00</span>:<span>00</span>:<span>00</span>.<span>00</span>
-      <strong id="idx">${intervalIdx}</strong>`
+      <strong class="idx">${intervalIdx}</strong>`
       intervalContainer.prepend(nextIntervalEl)
       
       intervalContainer.style.backgroundColor = 'var(--prim-dark)'
@@ -123,7 +125,7 @@ const createInterval = () => {
       const intervalEl = document.createElement("div")
       intervalEl.classList.add('interval')
       intervalEl.innerHTML = `<span>00</span>:<span>00</span>:<span>00</span>.<span>00</span>
-      <strong id="idx">${intervalIdx}</strong>`
+      <strong class="idx">${intervalIdx}</strong>`
       intervalContainer.prepend(intervalEl)
     }
     for(let prop in intervalTimer) {

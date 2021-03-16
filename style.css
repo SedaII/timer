@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
 :root {
   --prim-dark: #660000;
   --prim-light: #9e784f;
   /*grey #574f4f Bordeaux #660000 --prim-dark: #3a400d; --prim-light: #9e784f */
+}
+
+html {
+  font-family: 'Nunito', serif;
 }
 
 header {
@@ -39,8 +45,8 @@ body {
 
 .circle {
   background-color: transparent;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   position: absolute;
   border-radius: 50%;
   display: flex;
@@ -112,6 +118,8 @@ body {
   cursor: pointer;
   width: auto;
   font-size: 2rem;
+  font-weight: bold;
+  font-family: inherit;
 }
 
 .btn-container .btn:disabled {
